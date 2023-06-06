@@ -1,0 +1,62 @@
+﻿@using StokTakip.Models;
+@model Nakliyeciler
+
+@{
+    ViewBag.Title = "nakliyeciEkle";
+}
+
+
+<div class="col-md-12">
+    <div class="bg-light rounded h-100 p-4">
+        @if (Model == null)
+        {
+            <h2 class="mb-4">Nakliyat Firması Ekle</h2>
+
+        }
+        else
+        {
+            <h2 class="mb-4">Nakliyat Firmasını Düzenle</h2>
+
+        }
+        <form action="/Nakliyeci/nakliyeciEkle" method="post" role="form">
+            <div class="form-floating mb-3">
+                <input type="text" hidden class="form-control" id="floatingInput" placeholder="name@example.com" name="NakliyeciID" value="@Model.NakliyeciID">
+                @if (Model == null)
+                {
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="FirmaAdi">
+                    <label for="floatingInput">Firma Adı</label>
+
+                }
+                else
+                {
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="FirmaAdi" value="@Model.FirmaAdi">
+                    <label for="floatingInput">Firma Adı</label>
+                }
+            </div>
+            <div class="form-floating mb-3">
+                @if (Model == null)
+                {
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="FirmaBilgisi">
+                    <label for="floatingInput">Firma Bilgisi</label>
+                }
+                else
+                {
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="FirmaBilgisi" value="@Model.FirmaBilgisi">
+                    <label for="floatingInput">Firma Bilgisi</label>
+                }
+            </div>
+            -
+            @if (Model == null)
+            {
+                <button type="submit" class="btn btn-success text-center">Nakliyat Firma Bilgisini Ekle</button>
+
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success text-center">Nakliyat Firma Bilgisini Kaydet</button>
+
+            }
+        </form>
+
+    </div>
+</div>

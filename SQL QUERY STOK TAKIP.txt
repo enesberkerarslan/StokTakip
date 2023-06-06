@@ -1,0 +1,100 @@
+﻿CREATE DATABASE StokTakip;
+
+USE StokTakip;
+CREATE TABLE Kategori (
+    KategoriID int NOT NULL IDENTITY(1,1)  PRIMARY KEY,
+    Kategori varchar(255) NOT NULL,
+	Tanımı varchar(255)
+);
+
+CREATE TABLE Urunler(	
+	UrunID int IDENTITY(1,1) PRIMARY KEY, 
+	Fiyat float NOT NULL,
+	StokMiktari int NOT NULL,
+	AnlıkkDurum varchar (255) NOT NULL,
+	KategoriID int NOT NULL,
+	FOREIGN KEY(KategoriID) REFERENCES Kategori(KategoriID)
+);
+
+CREATE TABLE MagazaTurleri (
+    MagazaTurleriID int NOT NULL IDENTITY(1,1)  PRIMARY KEY,
+    MagazaTurAdi varchar(255) NOT NULL,
+);
+
+CREATE TABLE Adres(	
+	AdresID int IDENTITY(1,1) PRIMARY KEY, 
+	Sehir varchar(255) NOT NULL,
+	İlce varchar(255) NOT NULL,
+	Mahalle varchar(255) NOT NULL,
+	BinaNumarası varchar(255) NOT NULL,
+	Telefon int,
+);
+
+CREATE TABLE Siparis(	
+	SiparisID int IDENTITY(1,1) PRIMARY KEY, 
+	SiparisTarihi DATETIME,
+	SevkiyatTarihi int NOT NULL,
+	Onay varchar (255) NOT NULL,
+	AdresID int,
+	FOREIGN KEY(AdresID) REFERENCES Adres(AdresID),
+	KullaniciID int,
+	FOREIGN KEY(KullaniciID) REFERENCES Kullanıcı(KullaniciID),
+	NakliyeciID int,
+	FOREIGN KEY(NakliyeciID) REFERENCES Nakliyeciler(NakliyeciID),
+	SepetID int,
+	FOREIGN KEY(SepetID) REFERENCES Sepet(SepetID),
+);
+
+CREATE TABLE Nakliyeciler (
+    NakliyeciID int NOT NULL IDENTITY(1,1)  PRIMARY KEY,
+    FirmaAdi varchar(255) NOT NULL,
+    FirmaBilgisi varchar(255)
+);
+CREATE TABLE Magazalar(	
+	MagazaID int IDENTITY(1,1) PRIMARY KEY, 
+	MagazaAdi varchar(255),
+	MagazaTurleriID int,
+	FOREIGN KEY(MagazaTurleriID) REFERENCES MagazaTurleri(MagazaTurleriID),
+	AdresID int,
+	FOREIGN KEY(AdresID) REFERENCES Adres(AdresID),
+);
+CREATE TABLE Personeller(	
+	PersonelID int IDENTITY(1,1) PRIMARY KEY, 
+	PersonalAdi varchar(255) NOT NULL,
+	PersonelSoyadi varchar(255) NOT NULL,
+	PersonalUnvan varchar(255),
+	IseBaslamaTarihi varchar(255),
+	MagazaID int,
+	FOREIGN KEY(MagazaID) REFERENCES Magazalar(MagazaID),
+);
+
+CREATE TABLE Kullanıcı(	
+	KullaniciID int IDENTITY(1,1) PRIMARY KEY, 
+	KullaniciAdi nvarchar(50) NOT NULL UNIQUE,
+	KullaniciSifre nvarchar(50) NOT NULL,
+	Tip nvarchar(50) NOT NULL,
+        PersonelID int,
+	FOREIGN KEY(PersonelID) REFERENCES Personellers(PersonelID),
+);
+
+CREATE TABLE Sepet(	
+	SepetID int IDENTITY(1,1) PRIMARY KEY, 
+	Adet int NOT NULL,
+	ToplamFiyat int NOT NULL,
+        KullaniciID int,
+	FOREIGN KEY(KullaniciID) REFERENCES Kullanıcı(KullaniciID),
+);
+
+CREATE TABLE SepetUrunler(	
+	SepetUrunler int IDENTITY(1,1) PRIMARY KEY, 
+	Adet int NOT NULL,
+	ToplamFiyat int NOT NULL,
+	SepetID int NOT NULL,
+	FOREIGN KEY(SepetID) REFERENCES Sepet(SepetID),
+        UrunID int NOT NULL,
+	FOREIGN KEY(UrunID )REFERENCES Urunler(UrunID)
+
+
+);
+
+

@@ -1,0 +1,47 @@
+﻿@using StokTakip.Models;
+
+@{
+    ViewBag.Title = "SiparisDetay";
+}
+
+
+<div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">@ViewBag.sepetid ID'li Şipariş Detayınız</h6>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Ürün ID</th>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Ürün Fiyatı</th>
+                <th scope="col">Adet</th>
+                <th scope="col">Ürün Toplam Fiyat</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in ViewBag.sepettekiler)
+        {
+            if (ViewBag.sepetid == item.SepetID)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.UrunID</td>
+                        <td>@item.Urunler.UrunAdi</td>
+                        <td>@item.Urunler.Fiyat</td>
+                        <td>@item.Adet</td>
+                        <td>@item.ToplamUrunFiyat</td>
+
+                    </tr>
+                </tbody>
+
+            }
+
+
+        }
+        <tfoot>
+            <tr>
+                <th>Toplam Sipariş Tutarı =</th>
+                <th><span class="text-left">@ViewBag.ToplamFiyat</span></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

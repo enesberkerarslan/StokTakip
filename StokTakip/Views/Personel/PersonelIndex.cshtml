@@ -1,0 +1,101 @@
+﻿@using StokTakip.Models;
+@model List<Personeller>
+
+@{
+    ViewBag.Title = "PersonelIndex";
+}
+
+@section body{
+    <div class="modal fade small-modal" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="small-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" data-border-top="multi">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="tedarikciismi" class="tedarikciismi"> </p>
+                    <p id="silmeHatasi" class="silhata">hata </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                    <button type="button" id="tedSil" class="btn btn-primary ">Sil</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+}
+
+<div class="d-flex justify-content-center">
+
+    <a href="/Personel/personelEkle" class="btn btn-success m-2 text-center pt-2 w-100 justify-content-between">
+        <i class="fa fa-plus-square fa-3x"></i><div>Personel Ekle</div>
+    </a>
+</div><div class="bg-light rounded p-4">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Personel ID</th>
+                <th scope="col">Adı</th>
+                <th scope="col">Soyadı</th>
+                <th scope="col">Ünvanı</th>
+                <th scope="col">İşe Başlama Tarihi</th>
+                <th scope="col">Çalıştığı Mağaza Adı</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Sil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PersonelID</td>
+                    <td>@item.PersonalAdi</td>
+                    <td>@item.PersonelSoyadi</td>
+                    <td>@item.PersonalUnvan</td>
+                    <td>@item.IseBaslamaTarihi</td>
+                    <td>@item.Magazalar.MagazaAdi</td>
+                    <td><a href="/Personel/Guncelle/@item.PersonelID" type="button" class="btn btn-outline-success btn-sm">Güncelle</a></td>
+                    <td><button class="btn btn-outline-danger btn-sm modalAc" data-toggle="modal" data-tedid="@item.PersonelID" data-sirketadi="@item.PersonalAdi" data-target="#small-modal"> Sil </button> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script src="~/Content/assets/js/required/jquery-1.11.1.min.js"></script>
+    <script>
+
+        $(".modalAc").click(function () {
+            $("#silmeHatasi").html("");
+            var sirketAdi = $(this).data("sirketadi");
+
+            var id = $(this).data("tedid");
+            $(".modal-body>p.tedarikciismi").html("Silmekten emin misiniz?");
+            $("#tedSil").data("tid", id);
+        }
+        );
+
+        $("#tedSil").click(function () {
+            var id = $(this).data("tid");
+            $.ajax({
+
+                type: "POST",
+                url: "/Personel/Sil/" + id,
+                success: function (durum) {
+                    if (durum == "başarılı") {
+                        window.location.replace("/Personel/PersonelIndex/");
+                    }
+                    else {
+                        $("#silmeHatasi").html("Hata Oluştu" + durum);
+                    }
+                }
+            }
+            );
+
+        }
+        );
+    </script>
+}
+
+

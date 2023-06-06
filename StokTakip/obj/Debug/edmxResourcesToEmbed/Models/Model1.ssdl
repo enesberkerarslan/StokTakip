@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StokTakipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adres">
+    <Key>
+      <PropertyRef Name="AdresID" />
+    </Key>
+    <Property Name="AdresID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sehir" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="İlce" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Mahalle" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="BinaNumarası" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Telefon" Type="int" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kategori" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Tanımı" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Kullanıcı">
+    <Key>
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KullaniciSifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tip" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PersonelID" Type="int" />
+  </EntityType>
+  <EntityType Name="Magazalar">
+    <Key>
+      <PropertyRef Name="MagazaID" />
+    </Key>
+    <Property Name="MagazaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MagazaAdi" Type="varchar" MaxLength="255" />
+    <Property Name="MagazaTurleriID" Type="int" />
+    <Property Name="AdresID" Type="int" />
+  </EntityType>
+  <EntityType Name="MagazaTurleri">
+    <Key>
+      <PropertyRef Name="MagazaTurleriID" />
+    </Key>
+    <Property Name="MagazaTurleriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MagazaTurAdi" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Nakliyeciler">
+    <Key>
+      <PropertyRef Name="NakliyeciID" />
+    </Key>
+    <Property Name="NakliyeciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirmaAdi" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="FirmaBilgisi" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Personeller">
+    <Key>
+      <PropertyRef Name="PersonelID" />
+    </Key>
+    <Property Name="PersonelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonalAdi" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="PersonelSoyadi" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="PersonalUnvan" Type="varchar" MaxLength="255" />
+    <Property Name="IseBaslamaTarihi" Type="varchar" MaxLength="255" />
+    <Property Name="MagazaID" Type="int" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="SepetID" />
+    </Key>
+    <Property Name="SepetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ToplamFiyat" Type="float" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" />
+  </EntityType>
+  <EntityType Name="SepetUrunler">
+    <Key>
+      <PropertyRef Name="SepetUrunlerID" />
+    </Key>
+    <Property Name="SepetUrunlerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SepetID" Type="int" Nullable="false" />
+    <Property Name="UrunID" Type="int" Nullable="false" />
+    <Property Name="Adet" Type="float" Nullable="false" />
+    <Property Name="ToplamUrunFiyat" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Siparis">
+    <Key>
+      <PropertyRef Name="SiparisID" />
+    </Key>
+    <Property Name="SiparisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiparisTarihi" Type="datetime" />
+    <Property Name="SevkiyatTarihi" Type="int" Nullable="false" />
+    <Property Name="Onay" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="AdresID" Type="int" />
+    <Property Name="PersonelID" Type="int" />
+    <Property Name="NakliyeciID" Type="int" />
+    <Property Name="SepetID" Type="int" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="UrunID" />
+    </Key>
+    <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fiyat" Type="float" Nullable="false" />
+    <Property Name="StokMiktari" Type="int" Nullable="false" />
+    <Property Name="AnlıkkDurum" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="KategoriID" Type="int" Nullable="false" />
+    <Property Name="UrunAdi" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Kullanıcı__Perso__14270015">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Kullanıcı" Type="Self.Kullanıcı" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonelID" />
+      </Principal>
+      <Dependent Role="Kullanıcı">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Magazalar__Adres__4316F928">
+    <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+    <End Role="Magazalar" Type="Self.Magazalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adres">
+        <PropertyRef Name="AdresID" />
+      </Principal>
+      <Dependent Role="Magazalar">
+        <PropertyRef Name="AdresID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Magazalar__Magaz__4222D4EF">
+    <End Role="MagazaTurleri" Type="Self.MagazaTurleri" Multiplicity="0..1" />
+    <End Role="Magazalar" Type="Self.Magazalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MagazaTurleri">
+        <PropertyRef Name="MagazaTurleriID" />
+      </Principal>
+      <Dependent Role="Magazalar">
+        <PropertyRef Name="MagazaTurleriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Personell__Magaz__45F365D3">
+    <End Role="Magazalar" Type="Self.Magazalar" Multiplicity="0..1" />
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Magazalar">
+        <PropertyRef Name="MagazaID" />
+      </Principal>
+      <Dependent Role="Personeller">
+        <PropertyRef Name="MagazaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sepet__Kullanici__0A9D95DB">
+    <End Role="Kullanıcı" Type="Self.Kullanıcı" Multiplicity="0..1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanıcı">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SepetUrun__Sepet__08B54D69">
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="1" />
+    <End Role="SepetUrunler" Type="Self.SepetUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sepet">
+        <PropertyRef Name="SepetID" />
+      </Principal>
+      <Dependent Role="SepetUrunler">
+        <PropertyRef Name="SepetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SepetUrun__UrunI__09A971A2">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+    <End Role="SepetUrunler" Type="Self.SepetUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunID" />
+      </Principal>
+      <Dependent Role="SepetUrunler">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Siparis__AdresID__0E6E26BF">
+    <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adres">
+        <PropertyRef Name="AdresID" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="AdresID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Siparis__Kullani__123EB7A3">
+    <End Role="Kullanıcı" Type="Self.Kullanıcı" Multiplicity="0..1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanıcı">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Siparis__Nakliye__10566F31">
+    <End Role="Nakliyeciler" Type="Self.Nakliyeciler" Multiplicity="0..1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nakliyeciler">
+        <PropertyRef Name="NakliyeciID" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="NakliyeciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Siparis__Persone__0F624AF8">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonelID" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Siparis__SepetID__114A936A">
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sepet">
+        <PropertyRef Name="SepetID" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="SepetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Urunler__Kategor__3B75D760">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StokTakipModelStoreContainer">
+    <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanıcı" EntityType="Self.Kullanıcı" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Magazalar" EntityType="Self.Magazalar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MagazaTurleri" EntityType="Self.MagazaTurleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nakliyeciler" EntityType="Self.Nakliyeciler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personeller" EntityType="Self.Personeller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SepetUrunler" EntityType="Self.SepetUrunler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Siparis" EntityType="Self.Siparis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Kullanıcı__Perso__14270015" Association="Self.FK__Kullanıcı__Perso__14270015">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Kullanıcı" EntitySet="Kullanıcı" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Magazalar__Adres__4316F928" Association="Self.FK__Magazalar__Adres__4316F928">
+      <End Role="Adres" EntitySet="Adres" />
+      <End Role="Magazalar" EntitySet="Magazalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Magazalar__Magaz__4222D4EF" Association="Self.FK__Magazalar__Magaz__4222D4EF">
+      <End Role="MagazaTurleri" EntitySet="MagazaTurleri" />
+      <End Role="Magazalar" EntitySet="Magazalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Personell__Magaz__45F365D3" Association="Self.FK__Personell__Magaz__45F365D3">
+      <End Role="Magazalar" EntitySet="Magazalar" />
+      <End Role="Personeller" EntitySet="Personeller" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sepet__Kullanici__0A9D95DB" Association="Self.FK__Sepet__Kullanici__0A9D95DB">
+      <End Role="Kullanıcı" EntitySet="Kullanıcı" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SepetUrun__Sepet__08B54D69" Association="Self.FK__SepetUrun__Sepet__08B54D69">
+      <End Role="Sepet" EntitySet="Sepet" />
+      <End Role="SepetUrunler" EntitySet="SepetUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SepetUrun__UrunI__09A971A2" Association="Self.FK__SepetUrun__UrunI__09A971A2">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="SepetUrunler" EntitySet="SepetUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Siparis__AdresID__0E6E26BF" Association="Self.FK__Siparis__AdresID__0E6E26BF">
+      <End Role="Adres" EntitySet="Adres" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Siparis__Kullani__123EB7A3" Association="Self.FK__Siparis__Kullani__123EB7A3">
+      <End Role="Kullanıcı" EntitySet="Kullanıcı" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Siparis__Nakliye__10566F31" Association="Self.FK__Siparis__Nakliye__10566F31">
+      <End Role="Nakliyeciler" EntitySet="Nakliyeciler" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Siparis__Persone__0F624AF8" Association="Self.FK__Siparis__Persone__0F624AF8">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Siparis__SepetID__114A936A" Association="Self.FK__Siparis__SepetID__114A936A">
+      <End Role="Sepet" EntitySet="Sepet" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Urunler__Kategor__3B75D760" Association="Self.FK__Urunler__Kategor__3B75D760">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

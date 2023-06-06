@@ -1,0 +1,99 @@
+﻿@using StokTakip.Models;
+@model Personeller
+@{
+    ViewBag.Title = "personelEkle";
+}
+
+
+<div class="col-md-12">
+    <div class="bg-light rounded h-100 p-4">
+        @if (Model == null)
+        {
+            <h2 class="mb-4">Personel Ekle</h2>
+
+        }
+        else
+        {
+            <h2 class="mb-4">Personeli Düzenleyin</h2>
+
+        }
+    <form action="/Personel/personelEkle" method="post" role="form">
+        @if (Model == null)
+        {
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="PersonalAdi">
+                <label for="floatingInput">Personel Adı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="PersonelSoyadi">
+                <label for="floatingInput">Personel Soyadı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="PersonalUnvan">
+                <label for="floatingInput">Personel Ünvanı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="IseBaslamaTarihi">
+                <label for="floatingInput">İşe Başlama Tarihi</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="MagazaID">
+                    @if (ViewBag.magazalar != null)
+                    {
+                        foreach (Magazalar item in ViewBag.magazalar)
+                        {
+                            <option value="@item.MagazaID">@item.MagazaAdi</option>
+
+                        }
+                    }
+                </select>
+                <label for="floatingSelect">Seçiniz</label>
+            </div>
+            <button type="submit" class="btn btn-success text-center">Personeli Ekleyin</button>
+        }
+        else
+        {
+            <div>
+                <input type="text" hidden class="form-control" id="floatingInput" placeholder="name@example.com" name="PersonelID" value="@Model.PersonelID">
+            </div>            
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="PersonalAdi" value="@Model.PersonalAdi">
+                <label for="floatingInput">Personel Adı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="PersonelSoyadi" value="@Model.PersonelSoyadi">
+                <label for="floatingInput">Personel Soyadı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="PersonalUnvan" value="@Model.PersonalUnvan">
+                <label for="floatingInput">Personel Ünvanı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Password" name="IseBaslamaTarihi" value="@Model.IseBaslamaTarihi">
+                <label for="floatingInput">İşe Başlama Tarihi</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="MagazaID">
+                    @if (ViewBag.magazalar != null)
+                    {
+                        foreach (Magazalar item in ViewBag.magazalar)
+                        {
+                            <option value="@item.MagazaID">@item.MagazaAdi</option>
+
+                        }
+                    }
+                </select>
+                <label for="floatingSelect">Seçiniz</label>
+            </div>
+            <button type="submit" class="btn btn-success text-center">Personel Bilgisini Kaydet</button>
+        }
+
+
+    </form>
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,58 @@
+﻿@using StokTakip.Models;
+
+@{
+    ViewBag.Title = "SiparislerIndex";
+}
+@if (Model == null)
+{
+    <div>Geçmiş Siparişiniz Bulunmamaktadır.</div>
+}
+else
+{
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Siparişlerin</h6>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">SiparişID</th>
+                    <th scope="col">Sipariş Tarihi</th>
+                    <th scope="col">Aşama</th>
+                    <th scope="col">Detaylar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.siparisler)
+                {
+                    if (ViewBag.KullaniciID== item.KullaniciID)
+                    {                       
+                        <tr>
+                            <th scope="row">#</th>
+                            <td>@item.SiparisID</td>
+                            <td>@item.SiparisTarihi</td>
+                            @if (item.Onay == "Kargoya Verildi")
+                            {
+
+                                <td><span class="btn btn-outline-success btn-sm">@item.Onay</span></td>
+                            }
+                            else if (item.Onay == "Siparisiniz Hazirlaniyor")
+                            {
+
+                                <td><span class="btn btn-outline-info btn-sm">@item.Onay</span></td>
+                            }
+                            else
+                            {
+
+                                <td><span class="btn btn-outline-danger btn-sm">@item.Onay</span></td>
+                            }
+                            <td><a href="/Siparisler/SiparisDetay/@item.SepetID" class="btn btn-sm btn-primary">Detail</a></td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+

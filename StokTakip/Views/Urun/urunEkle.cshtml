@@ -1,0 +1,99 @@
+﻿@using StokTakip.Models;
+@model Urunler
+
+@{
+    ViewBag.Title = "urunEkle";
+}
+
+<div class="col-md-12">
+    <div class="bg-light rounded h-100 p-4">
+        @if (Model == null)
+        {
+            <h2 class="mb-4">Ürün Ekle</h2>
+
+        }
+        else
+        {
+            <h2 class="mb-4">Ürünü Düzenleyiniz</h2>
+
+        }
+    <form action="/Urun/urunEkle" method="post" role="form">
+        @if (Model == null)
+        {
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="UrunAdi">
+                <label for="floatingInput">Ürün Adı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" placeholder="Password" name="Fiyat">
+                <label for="floatingInput">Fiyat</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" placeholder="Password" name="StokMiktari">
+                <label for="floatingInput">Stok Miktarı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="AnlıkkDurum">
+                    <option value="Stokta Var">Stokta Var</option>
+                    <option value="Stokta Yok">Stokta Yok</option>
+                </select>
+                <label for="floatingSelect">Birisini Seçiniz</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="KategoriID">
+                    @if (ViewBag.kategori != null)
+                    {
+                        foreach (Kategori item in ViewBag.kategori)
+                        {
+                            <option value="@item.KategoriID">@item.Kategori1</option>
+
+                        }
+                    }
+                </select>
+                <label for="floatingSelect">Seçiniz</label>
+            </div>
+            <button type="submit" class="btn btn-success text-center">Ürünü Ekle</button>
+
+        }
+        else
+        {
+            <input type="text" hidden class="form-control" id="floatingInput" placeholder="name@example.com" name="UrunID" value="@Model.UrunID">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="UrunAdi" value="@Model.UrunAdi">
+                <label for="floatingInput">Ürün Adı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" placeholder="Password" name="Fiyat" value="@Model.Fiyat">
+                <label for="floatingInput">Fiyat</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" placeholder="Password" name="StokMiktari" value="@Model.StokMiktari">
+                <label for="floatingInput">Stok Miktarı</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="AnlıkkDurum">
+                    <option value="Stokta Var">Stokta Var</option>
+                    <option value="Stokta Yok">Stokta Yok</option>
+                </select>
+                <label for="floatingSelect">Birisini Seçiniz</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="KategoriID">
+                    @if (ViewBag.kategori != null)
+                    {
+                        foreach (Kategori item in ViewBag.kategori)
+                        {
+                            <option value="@item.KategoriID">@item.Kategori1</option>
+
+                        }
+                    }
+                </select>
+                <label for="floatingSelect">Seçiniz</label>
+            </div>
+            <button type="submit" class="btn btn-success text-center">Ürünü Bilgilerini Kaydedin</button>
+        }
+
+    </form>
+
+    </div>
+</div>

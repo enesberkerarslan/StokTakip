@@ -1,0 +1,55 @@
+﻿@using StokTakip.Models;
+@model List<Urunler>
+
+@{
+    ViewBag.Title = ViewBag.isim;
+}
+
+<h2>@ViewBag.isim</h2>
+
+<div class="bg-light rounded p-4">
+    <table class="table table-hover ">
+        <thead>
+            <tr>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Stok Miktarı</th>
+                <th scope="col">Anlık Durum</th>
+                <th scope="col">Sepete Ekle</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        @if (item.KategoriID == ViewBag.urun)
+                        {
+                            <td>@item.UrunAdi</td>
+                            <td>@item.Fiyat</td>
+                            <td>@item.StokMiktari</td>
+                            if (@item.AnlıkkDurum == "Stokta Var")
+                            {
+                                <td><span class="label label-success">@item.AnlıkkDurum</span></td>
+
+                            }
+                            else
+                            {
+                                <td><span class="label label-danger">@item.AnlıkkDurum</span></td>
+
+                            }
+                            <td><a href="/Sepet/SepeteEkle/@item.UrunID" span class="btn btn-info btn-sm" value="@HttpContext.Current.User.Identity.Name">Sepete Ekle</a></td>
+
+                        }
+
+                    </tr>
+
+                }
+            }
+
+
+            </tbody>
+        </table>
+</div>

@@ -1,0 +1,56 @@
+﻿@using StokTakip.Models;
+@model Sepet
+@{
+    ViewBag.Title = "SepetIndex";
+}
+
+@if (Model == null)
+{
+    <div>sepetiniz boş</div>
+}
+else
+{
+<form action="/Sepet/siparisOlustur" method="post" role="form">
+
+    <h6 class="mb-4">Sepetim</h6>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Ürün ID</th>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Birim Fiyatı</th>
+                <th scope="col">Miktarı</th>
+                <th scope="col">Toplam Ürün Fiyatı</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in ViewBag.sepeturunler)
+            {
+                if (ViewBag.sepetid == item.SepetID)
+                {
+                    <tr>
+                        <th scope="col">@item.UrunID</th>
+                        <th scope="col">@item.Urunler.UrunAdi</th>
+                        <th scope="col">@item.Urunler.Fiyat</th>
+                        <th scope="col">@item.Adet</th>
+                        <th scope="col">@item.ToplamUrunFiyat</th>
+                        <th scope="col"><a href="/Sepet/sepettenKaldir/@item.UrunID" class="btn btn-danger">Sepetten Kaldır</a></th>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Toplam Sipariş Tutarı =</th>
+                <th><span class="text-left">@Model.ToplamFiyat</span></th>
+            </tr>
+        </tfoot>
+    </table>   
+    <button type="submit" class="btn btn-success text-center btn-block w-50">Sipariş Oluştur</button>
+
+
+</form>
+     
+}

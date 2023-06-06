@@ -1,0 +1,114 @@
+﻿@using StokTakip.Models;
+@model List<Urunler>
+@{
+    ViewBag.Title = "Ürünler Sayfası";
+
+
+}
+
+@section body{
+    <div class="modal fade small-modal" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="small-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" data-border-top="multi">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="tedarikciismi" class="tedarikciismi"> </p>
+                    <p id="silmeHatasi" class="silhata">hata </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                    <button type="button" id="tedSil" class="btn btn-primary ">Sil</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+}
+<h2>Tüm Ürünler</h2>
+<div class="d-flex justify-content-center">
+
+    <a href="/Urun/urunEkle" class="btn btn-success m-2 text-center pt-2 w-100 justify-content-between">
+        <i class="fa fa-plus-square fa-3x"></i><div>Ürün Ekle</div>
+    </a>
+</div>
+<div class="bg-light rounded p-4">
+    <table class="table table-hover ">
+        <thead>
+            <tr>
+                <th scope="col">Ürün ID</th>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Stok Miktarı</th>
+                <th scope="col">Anlık Durum</th>
+                <th scope="col">Güncelleme</th>
+                <th scope="col">Silme</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.UrunID</td>
+                    <td>@item.UrunAdi</td>
+                    <td>@item.Fiyat</td>
+                    <td>@item.StokMiktari</td>
+                    @if (@item.AnlıkkDurum == "Stokta Var")
+                    {
+                        <td><span class="label label-success">@item.AnlıkkDurum</span></td>
+
+                    }
+                    else
+                    {
+                        <td><span class="label label-danger">@item.AnlıkkDurum</span></td>
+
+                    }
+                    <td><a href="/Urun/guncelle/@item.UrunID" type="button" class="btn btn-outline-success btn-sm">Güncelle</a></td>
+                    <td><button class="btn btn-outline-danger btn-sm modalAc" data-toggle="modal" data-tedid="@item.UrunID" data-sirketadi="@item.UrunAdi" data-target="#small-modal"> Sil </button> </td>
+
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script src="~/Content/assets/js/required/jquery-1.11.1.min.js"></script>
+    <script>
+
+        $(".modalAc").click(function () {
+            $("#silmeHatasi").html("");
+            var sirketAdi = $(this).data("sirketadi");
+
+            var id = $(this).data("tedid");
+            $(".modal-body>p.tedarikciismi").html("Silmekten emin misiniz?");
+            $("#tedSil").data("tid", id);
+        }
+        );
+
+        $("#tedSil").click(function () {
+            var id = $(this).data("tid");
+            $.ajax({
+                type: "POST",
+                url: "/Urun/Sil/" + id,
+                success: function (durum) {
+                    if (durum == "başarılı") {
+                        window.location.replace("/Urun/UrunIndex/");
+                    }
+                    else {
+                        $("#silmeHatasi").html("Hata Oluştu" + durum);
+                    }
+                }
+            }
+            );
+
+        }
+        );
+    </script>
+}
+
+

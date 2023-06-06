@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="54b8ab412c964892938d91719c4574fa" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="StokTakipModel.Adres" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Kategori" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Kullanıcı" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Magazalar" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.MagazaTurleri" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Nakliyeciler" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Personeller" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Sepet" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.SepetUrunler" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Siparis" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipModel.Urunler" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <AssociationConnector Association="StokTakipModel.FK__Magazalar__Adres__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Siparis__AdresID__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Urunler__Kategor__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Sepet__Kullanici__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Magazalar__Magaz__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Personell__Magaz__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Siparis__Nakliye__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Siparis__Persone__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__SepetUrun__Sepet__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Siparis__SepetID__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__SepetUrun__UrunI__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipModel.FK__Siparis__Kullani__123EB7A3" />
+        <AssociationConnector Association="StokTakipModel.FK__Kullanıcı__Perso__14270015" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

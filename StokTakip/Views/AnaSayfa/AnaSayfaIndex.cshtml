@@ -1,0 +1,79 @@
+﻿@using StokTakip.Models;
+
+@{
+    ViewBag.Title = "AnaSayfaIndex";
+
+}
+@if (ViewBag.tip == "A" || ViewBag.tip == "Y")
+{
+
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Siparişlerin</h6>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">SiparişID</th>
+                    <th scope="col">Sipariş Tarihi</th>
+                    <th scope="col">Siparişi Oluşturan</th>
+                    <th scope="col">Aşama</th>
+                    <th scope="col">Siparişi onayla</th>
+                    <th scope="col">Sipariş Kargoya Verildi</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.siparisler)
+                {
+
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>@item.SiparisID</td>
+                        <td>@item.SiparisTarihi</td>
+                        <td>@item.Kullanıcı.KullaniciAdi</td>
+                        @if (item.Onay == "Kargoya Verildi")
+                        {
+
+                            <td><span class="btn btn-outline-success btn-sm">@item.Onay</span></td>
+                        }
+                        else if (item.Onay == "Siparisiniz Hazirlaniyor")
+                        {
+
+                            <td><span class="btn btn-outline-info btn-sm">@item.Onay</span></td>
+                        }
+                        else
+                        {
+
+                            <td><span class="btn btn-outline-danger btn-sm">@item.Onay</span></td>
+                        }
+                        <td><a href="/AnaSayfa/SiparisOnayla/@item.SiparisID" class="btn btn-sm btn-success">Sipariş Onay</a></td>
+                        <td><a href="/AnaSayfa/KargoOnayla/@item.SiparisID" class="btn btn-sm btn-success">Kargo Onay</a></td>
+                    </tr>
+
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+<div>
+
+    @foreach (Personeller item in ViewBag.kullanici)
+    {
+        if (ViewBag.user == item.PersonelID)
+        {
+
+            <h5>Personel Adı :      @item.PersonalAdi</h5><br />
+            <h5>Personel Soyadi :   @item.PersonelSoyadi</h5><br />
+            <h5>Personel Ünvanı :   @item.PersonalUnvan</h5><br />
+            <h5>Çalıştığı Mağaza :  @item.Magazalar.MagazaAdi</h5><br />
+            <h5>Mağaza Adresi : @item.Magazalar.Adres.Sehir  @item.Magazalar.Adres.İlce @item.Magazalar.Adres.Mahalle No:@item.Magazalar.Adres.BinaNumarası</h5><br />
+            <h5>Mağaza Telefonu : @item.Magazalar.Adres.Telefon</h5><br />
+
+
+        }
+    }
+</div>
+}

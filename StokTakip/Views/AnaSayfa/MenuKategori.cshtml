@@ -1,0 +1,11 @@
+﻿
+@using StokTakip.Models;
+
+@model List<Kategori>
+
+
+@foreach (var item in Model)
+{
+    <a href="/Kategori/Kategoriler/@item.KategoriID" class="dropdown-item" >@item.Kategori1</a>
+
+}

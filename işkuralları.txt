@@ -1,0 +1,11 @@
+1 Kategoride 1den fazla ürün olabilir. 1 ürün 1 kategoride olabilir.
+1 Ürün 1den fazla sepette olabilir. 1Sepette 1den fazla ürün olabilir.
+1Sepetten 1 sipariş verilebilir. 1 Siparişin içeriği 1sepetten alınır.
+1Sepeti 1 kullanıcı doldurabilir. 1kullanıcının 1sepeti olabilir.
+1kullanıcı 1den fazla sipariş verebilir. 1Siparişin 1kullanıcısı vardır.
+1kullanıcıya bağlı 1 personel olabilir. 1personelin 1 kullanıcı hesabı vardır.
+1siparişte 1 adres olabilir. 1adres 1den fazla siparişte olabilir.
+1mağazanın 1adresi olabilir. 1Adrese bağlı 1 mağaza vardır.
+1mağazanın 1türü vardır. 1türe bağlı 1den fazla mağaza olabilir.
+1 personel 1mağazada çalışabilir. 1mağazada 1den fazla personel çalışabilir.
+1siparişi 1 nakliyat firması götürebilir. 1nakliyat firması 1den fazla siparişi götürebilir.
